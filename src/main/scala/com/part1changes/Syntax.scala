@@ -56,4 +56,10 @@ object Syntax:
       char <- List('a', 'b')
     yield s"$num-$char"
 
-  def main(args: Array[String]): Unit = {}
+  val meaningOfLife = 42
+  val aPatterMatch = meaningOfLife match
+    case 1 => "the one"
+    case 2 => "2"
+    case _ => "something else"
+
+def main(args: Array[String]): Unit = {}
