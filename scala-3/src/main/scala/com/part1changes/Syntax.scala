@@ -62,4 +62,20 @@ object Syntax:
     case 2 => "2"
     case _ => "something else"
 
+  // try-catch
+  val tryCatch =
+    try {
+      "".charAt(0) // throws IOOB
+    } catch {
+      case oobE: IndexOutOfBoundsException => '-'
+      case e: Exception                    => 'z'
+    }
+
+  // Scala 3 braceless
+  val tryCatch_v2 =
+    try "".charAt(2)
+    catch
+      case oobE: IndexOutOfBoundsException => '-'
+      case e: Exception                    => 'z'
+
 def main(args: Array[String]): Unit = {}
