@@ -1,5 +1,3 @@
-package com.part1changes
-
 object Syntax:
 
   // personal note: scala 2 code is compatible with scala 3
@@ -77,5 +75,15 @@ object Syntax:
     catch
       case oobE: IndexOutOfBoundsException => '-'
       case e: Exception                    => 'z'
+
+  def isPrime(n: Int): Boolean =
+    def aux(potentialDivisor: Int): Boolean =
+      if potentialDivisor > n / 2 then true
+      else if n % potentialDivisor == 0 then false
+      else aux(potentialDivisor - 1)
+
+    aux(2)
+  end isPrime // <- Scala 3: (optional), it is a way to indicate that a code block ends
+  // it can be used on if, while, match, for, methods, classes, object
 
 def main(args: Array[String]): Unit = {}
