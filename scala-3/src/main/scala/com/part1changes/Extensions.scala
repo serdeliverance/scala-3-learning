@@ -42,12 +42,10 @@ object Extensions:
 
     extension [A](tree: Tree[A])
       def map[B](f: A => B): Tree[B] =
-        def auxMap[A, B](tree: Tree[A], f: A => B): Tree[B] =
-          tree match
-            case Leaf(value) => Leaf(f(value))
-            case Branch(left, right) =>
-              Branch(auxMap(left, f), auxMap(right, f))
-        auxMap(tree, f)
+        tree match
+          case Leaf(value) => Leaf(f(value))
+          case Branch(left, right) =>
+            Branch(left.map(f), right.map(f))
 
   @main def main() =
     import Ex1._
