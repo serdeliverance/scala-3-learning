@@ -73,7 +73,7 @@ object Extensions:
     println(result2)
 
     val result3 = tree.forall(_ % 2 == 0)
-    println(s"forall: ${result3}")
+    println(s"forall: $result3")
 
     val result4 = tree.sum
-    println(s"sum: ${result4}")
+    println(s"sum: $result4")
