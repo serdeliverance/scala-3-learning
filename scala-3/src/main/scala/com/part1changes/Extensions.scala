@@ -1,5 +1,7 @@
 package com.part1changes
 
+import scala.annotation.tailrec
+
 object Extensions:
 
   /** Exercises:
@@ -47,6 +49,18 @@ object Extensions:
           case Branch(left, right) =>
             Branch(left.map(f), right.map(f))
 
+      def forall(predicate: A => Boolean): Boolean =
+        tree match
+          case Leaf(value) => predicate(value)
+          case Branch(left, right) =>
+            left.forall(predicate) && right.forall(predicate)
+
+    extension (tree: Tree[Int])
+      def sum: Int =
+        tree match
+          case Leaf(value)         => value
+          case Branch(left, right) => left.sum + right.sum
+
   @main def main() =
     import Ex1._
     import Ex2._
@@ -54,6 +68,12 @@ object Extensions:
     val result = 8.isPrime()
     println(result)
 
-    val tree = Branch(Branch(Leaf(27), Leaf(12)), Leaf(3))
+    val tree = Branch(Branch(Leaf(28), Leaf(12)), Leaf(3))
     val result2 = tree.map(_ * 2)
     println(result2)
+
+    val result3 = tree.forall(_ % 2 == 0)
+    println(s"forall: ${result3}")
+
+    val result4 = tree.sum
+    println(s"sum: ${result4}")
