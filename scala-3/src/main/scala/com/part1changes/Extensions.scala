@@ -31,10 +31,31 @@ object Extensions:
           else if (n % potDivisor == 0) false
           else isPrimeHelper(potDivisor + 1)
 
-      assert(n >= 0)
-      if (n == 0 || n == 1) true
-      else isPrimeHelper(2)
+        assert(n >= 0)
+        if (n == 0 || n == 1) true
+        else isPrimeHelper(2)
 
-  sealed abstract trait Tree[A]
-  case class Leaf[A](value: A) extends Tree[A]
-  case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
+  object Ex2:
+    sealed abstract trait Tree[A]
+    case class Leaf[A](value: A) extends Tree[A]
+    case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
+
+    extension [A](tree: Tree[A])
+      def map[B](f: A => B): Tree[B] =
+        def auxMap[A, B](tree: Tree[A], f: A => B): Tree[B] =
+          tree match
+            case Leaf(value) => Leaf(f(value))
+            case Branch(left, right) =>
+              Branch(auxMap(left, f), auxMap(right, f))
+        auxMap(tree, f)
+
+  @main def main() =
+    import Ex1._
+    import Ex2._
+
+    val result = 8.isPrime()
+    println(result)
+
+    val tree = Branch(Branch(Leaf(27), Leaf(12)), Leaf(3))
+    val result2 = tree.map(_ * 2)
+    println(result2)
